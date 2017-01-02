@@ -1,0 +1,38 @@
+
+  .inputdemoIcons .inputIconDemo {
+    min-height: 48px;
+   }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+    color: green;
+   }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+    color: dodgerblue;
+   }
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+    color: red;
+  }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.hint {
+  position: absolute;
+  left: 5px;
+  right: auto;
+  bottom: 0px;
+  font-size: 14px;
+  line-height: 14px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  color: grey;
+}
+#after{
+    width: 30%;
+    margin: auto;
+}
+
+#after{
+  display: none;
+}

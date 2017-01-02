@@ -1,0 +1,144 @@
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" href="mod/css/style.css" media="screen" title="no title">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//ajax.microsoft.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="mod/js/feedbackjs.js" type="text/javascript">
+    </script>
+</head>
+
+<body ng-app="FeedBackApp" ng-cloak>
+    <div role="dialog">
+        <md-toolbar>
+            <div layout-align="center center" class="md-toolbar-tools">
+                <h2>Форма обратной связи!</h2>
+            </div>
+        </md-toolbar>
+    </div>
+    <div class="" layout-padding>
+
+        <div ng-controller="DemoCtrl" id="content" layout-align="center center" ng-cloa layout="column">
+
+            <form class="" id="sendform" action="#" method="post" layout-padding>
+
+
+                <md-content class="md-no-momentum md-whiteframe-23dp">
+                    <md-input-container class="md-icon-float md-block">
+
+                        <md-icon md-svg-src="mod/img/ic_person_24px.svg" class="name"></md-icon>
+                        <input ng-model="user.name" ng-required="true" placeholder="Имя" name="name" type="text">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <md-icon md-svg-src="mod/img/ic_phone_24px.svg"></md-icon>
+                        <input ng-model="user.phone" ng-required="true" ng-minlength="6" placeholder="Номер" name="phone" type="number">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+
+                        <md-icon md-svg-src="mod/img/ic_email_24px.svg" class="email"></md-icon>
+                        <input ng-model="user.email" name="email" type="email" placeholder="Email" ng-required="true">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-icon md-svg-src="mod/img/ic_pen_24px.svg" class="name"></md-icon>
+                        <textarea ng-model="user.text" name="message" placeholder="Ваше сообщение:" cols='101' rows='10'></textarea>
+                    </md-input-container>
+
+                    <md-content layout-padding layout="column" layout-align="center center">
+                        <aps-upload-file></aps-upload-file>
+                    </md-content>
+
+                    <md-content layout-padding layout="column" layout-align="center end">
+                        <md-button id="submit" layout="column" type="submit" class="md-raised md-primary md-button md-ink-ripple" layout-align="end end">Отправить</md-button>
+                    </md-content>
+                </md-content>
+
+
+
+
+            </form>
+        </div>
+    </div>
+
+    <md-card layout-align="center center" ng-cloa layout="column" id="after">
+        <md-card-header>
+            <md-card-avatar>
+                <img src="mod/img/logo.svg" />
+            </md-card-avatar>
+            <md-card-header-text>
+                <span class="md-title"></span>
+                <span class="md-subhead">Angular Material</span>
+            </md-card-header-text>
+        </md-card-header>
+        <img src="mod/img/washedout.png" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline"></span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>
+                The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+            </p>
+        </md-card-content>
+    </md-card>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script type="text/javascript">
+        angular
+            .module('FeedBackApp', ['ngMaterial'])
+            .controller('DemoCtrl', function($scope) {});
+    </script>
+
+    <script type="text/javascript">
+        angular.module('FeedBackApp')
+
+        .controller('AppCtrl', function($scope) {
+
+        }).directive('apsUploadFile', apsUploadFile);
+
+        function apsUploadFile() {
+            var directive = {
+                restrict: 'E',
+                template: '<md-input-container  md-no-float>    <input  id="textInput" ng-model="fileName" type="text" placeholder="Файл не выбран" ng-readonly="true"></md-input-container> <input id="fileInput" type="file" name="file" class="ng-hide"><md-button id="uploadButton" class="md-raised md-primary" aria-label="attach_file">Загрузить файл</md-button> ',
+                link: apsUploadFileLink
+            };
+            return directive;
+        }
+
+        function apsUploadFileLink(scope, element, attrs) {
+            var input = $(element[0].querySelector('#fileInput'));
+            var button = $(element[0].querySelector('#uploadButton'));
+            var textInput = $(element[0].querySelector('#textInput'));
+
+            if (input.length && button.length && textInput.length) {
+                button.click(function(e) {
+                    input.click();
+                });
+                textInput.click(function(e) {
+                    input.click();
+                });
+            }
+
+            input.on('change', function(e) {
+                var files = e.target.files;
+                if (files[0]) {
+                    scope.fileName = files[0].name;
+                } else {
+                    scope.fileName = null;
+                }
+                scope.$apply();
+            });
+        }
+    </script>
+
+</body>
+
+</html>
